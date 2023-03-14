@@ -65,6 +65,9 @@ function createBook (){
     let bookTitle = document.createElement('p')
     let bookAuthor = document.createElement('p')
     let bookPages = document.createElement('p')
+    let deleteBook = document.createElement('button')
+    deleteBook.innerHTML = 'X'
+    deleteBook.classList.add('deleteBookBtn')
 
     bookCard.classList.add('book-card')
     bookContainer.appendChild(bookCard)
@@ -75,6 +78,7 @@ function createBook (){
     bookCard.appendChild(bookTitle)
     bookCard.appendChild(bookAuthor)
     bookCard.appendChild(bookPages)
+    bookCard.appendChild(deleteBook)
 
     let titleOnly = title.value;
     let authorOnly = author.value;
@@ -85,8 +89,14 @@ function createBook (){
     bookPages.innerHTML  = pagesOnly;
     console.log(bookTitle)
 
+    deleteBook.addEventListener('click', ()=>{
+        bookContainer.removeChild(bookCard)
+    })
+
     
 }
+
+
 
 
 saveBook.addEventListener('click', ()=>{
