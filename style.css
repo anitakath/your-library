@@ -12,8 +12,7 @@ body{
     align-items: center;
     color: white;
     flex-direction: column;
-    height: 100vh;
-    overflow: hidden;
+   
 }
 
 
@@ -73,7 +72,7 @@ body{
 }
 
 
-.stroeBookParagraph{
+.storeBookParagraph{
     font-size: 1.4rem;
     letter-spacing: 3px;
     word-spacing: 2px;
@@ -103,6 +102,9 @@ body{
     color: black;
     letter-spacing: 3px;
     text-shadow: 1px 1px 5px silver;
+    margin: 10px;
+    text-align: center;
+    line-height: 25px;
 }
 
 
@@ -132,11 +134,13 @@ body{
     border:2px solid white;
     width: 100vw;
     min-height: 200px;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(10, 120px);
     justify-content: center;
     align-items: center;
     background-color: rgba(255, 255, 255, 0.5);
     margin: 40px 10px;
+    flex-wrap: wrap;
     
 }
 
@@ -191,4 +195,51 @@ body{
 
 .deleteBookBtn:active{
     transform: scale(0.96);
+}
+
+
+@media (max-width: 1200px){
+
+
+ 
+    .inputField{
+        width: 50vw;
+        transition: 1s ease;
+    }
+
+    .bookContainer{
+        grid-template-columns: repeat(5, 120px);
+        transition: 1s ease;
+    }
+}
+
+
+@media (max-width: 800px){
+    .inputField{
+        width: 70vw;
+        transition: 1s ease;
+    }
+
+    .displayBook, .storeBookParagraph, #infoTestVersion{
+        margin: 20px 10px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 600px){
+    .bookContainer{
+        grid-template-columns: repeat(2, 120px);
+        transition: 1s ease;
+        gap: 50px;
+        
+    }
+}
+
+@media (max-width: 400px){
+    .inputField{
+        width: 70vw;
+        transition: 1s ease;
+    }
+
+   
 }
