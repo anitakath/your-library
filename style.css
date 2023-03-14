@@ -137,7 +137,7 @@ body{
 }
 
 .book-card{
-    max-width: 200px;
+    width: auto;
     height: 200px;
     background-color: whitesmoke;
     transition: 0.5 ease-in-out;
