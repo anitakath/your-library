@@ -1,4 +1,9 @@
-let myLibrary = [];
+let myLibrary = JSON.parse(localStorage.getItem("books")) || []
+console.log(myLibrary)
+
+
+
+
 
 
 
@@ -56,6 +61,13 @@ function maxClicks(){
     }
 }
 
+/*
+function getStoredBook(){
+    document.querySelector('.bookCard') = JSON.parse(localStorage.getItem("bookDiv"))
+}3*/
+
+
+
 
 //create the book
 
@@ -69,7 +81,7 @@ function createBook (){
     deleteBook.innerHTML = 'X'
     deleteBook.classList.add('deleteBookBtn')
 
-    bookCard.classList.add('book-card')
+    bookCard.classList.add('bookCard')
     bookContainer.appendChild(bookCard)
 
     bookTitle.classList.add('innerBook')
@@ -93,7 +105,16 @@ function createBook (){
         bookContainer.removeChild(bookCard)
     })
 
-    
+ 
+
+    localStorage.setItem("bookDiv", JSON.stringify(myLibrary))
+
+    /*
+    function addBook(){
+        localStorage.setItem("bookDiv", bookCard.outerHTML)
+    }*/
+
+
 }
 
 
@@ -138,23 +159,21 @@ saveBook.addEventListener('click', ()=>{
         maxClicks();
 
 
-      
-        
 
-     } else{
+    } else{
         displayBook.innerHTML = 'please make sure you have filled in all fields'
         displayBook.style.color ='red'
         displayBook.style.textShadow = '1px 1px 1px red'
     }
     
 
-    // log the stored book into the console
-    // log library
   
-    console.log(myLibrary)
+    
    
 
 })
+
+console.log(myLibrary)
 
 
 
@@ -192,7 +211,18 @@ for(let j = 0; j < inputs.length; j++){
             label.style.color = 'rgba(165, 42, 42, 0.5)';
         }       
     })
-
-
 }
+
+
+/* -------------------------------------MOBILE SCROLL DOWN TO BOOKSHELF-------------------------------- */
+const mobileScrollDown = document.getElementById('mobileScrollDown')
+
+mobileScrollDown.addEventListener('click', ()=>{
+    const bookContainer = document.getElementById('bookContainer')
+    window.scrollTo({
+        top: 750,
+        behavior: 'smooth'
+    })
+
+})
 

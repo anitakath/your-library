@@ -16,6 +16,11 @@ body{
 }
 
 
+a{
+    color: black;
+    text-decoration: none;
+}
+
 .inputContainer{
     border:2px solid white;
     width: 100vw;
@@ -84,6 +89,12 @@ body{
 
 }
 
+#displayArea{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
 
 #displayBook{
     font-size: 22px;
@@ -94,6 +105,7 @@ body{
     font-weight: bolder;
     text-shadow: 1px 1px 1px black;
     text-align: center;
+    
 }
 
 
@@ -119,6 +131,17 @@ body{
     color: red;    
 }
 
+#mobileScrollDown{
+    display: none;
+    scroll-behavior: smooth;
+}
+
+#goDown{
+    font-size: 2rem;
+    font-weight: bolder;
+    scroll-behavior: smooth;
+    
+}
 
 
 
@@ -150,7 +173,7 @@ body{
 }
 
 
-.book-card{
+.bookCard{
     max-width: 500px;
     height: 200px;
     background-color: whitesmoke;
@@ -241,5 +264,17 @@ body{
         transition: 1s ease;
     }
 
+    .storeBookParagraph{
+        font-size: 1rem;
+    }
+
+    .displayBook{
+        font-size: 1.5rem;
+    }
+
+    #mobileScrollDown{
+        display: inline-block;
+        transition: 1s ease;
+    }
    
 }
