@@ -1,8 +1,13 @@
+
+
 let myLibrary = JSON.parse(localStorage.getItem("books")) || []
 console.log(myLibrary)
 
 
+const saveBook = document.getElementById('saveBook')
 
+let library =  JSON.parse(localStorage.getItem("books")) || []
+console.log(library)
 
 
 
@@ -11,8 +16,139 @@ function Book(title, author, pages){
     this.title = title;
     this.author = author;
     this.pages = pages;
+}
+
+function render(){
+
+    let bookContainer = document.getElementById('bookContainer')
+    bookContainer.innerHTML = " ";
+    //loop over the library array to display your books
+    for(let i = 0; i < library.length; i++){
+        //console.log(library[i])
+        let book = library[i]
+        let bookDiv = document.createElement('div')
+        bookDiv.setAttribute("class", "bookDiv")
+
+        bookDiv.innerHTML = `
+        <div class="bookTitle">
+            <h3 class="title">${book.title}</h3>
+            <h4 class="author"><em>by:</em> ${book.author}</h4>
+            <p class="pages">${book.pages} pages</p>
+        </div>
+        <div class="deleteBookDiv"> 
+               <button class="deleteBook" onclick="removeBook(${i})">X</button>
+         </div>
+        
+        `
+        
+        bookContainer.appendChild(bookDiv)
+
+       
+    }
+
+     //let users add a maximum of 10 books
+     if(library.length === 10){
+        saveBook.disabled = true;
+        displaySignUp();
+    }
+    else{
+        saveBook.disabled = false;
+    }
+}
+
+
+
+function removeBook(idx){
+    library.splice(idx, 1)
+    render();
+}
+
+
+
+
+function displaySignUp () {
+    // alert('moincito')
+    const inputContainer = document.querySelector('.inputContainer')
+    const inputField = document.querySelector('.inputField')
+    const displayArea = document.getElementById('displayArea')
+    const signUpContainer = document.createElement('div')
+
+    signUpContainer.innerHTML = `
+    <div class="signUpTitle">
+       <h1> SIGN UP NOW </h1>
+       <h4> and get 30 days of unlimited storage for free </h4> 
+    </div>
+    <div class="signUpBtn">
+       <button> sign up </button>
+    </div>
+
+    `
+    signUpContainer.setAttribute("class", "signUpContainer")
+    inputContainer.appendChild(signUpContainer)
+
+    inputField.style.display = 'none'
+    inputField.style.transition = '1s ease'
+    displayArea.style.display = 'none'
+    displayArea.style.transition = '1s ease'
 
 }
+
+
+
+function addBookToLibrary(){
+    // get the values from the inputs
+    let title= document.getElementById('title').value
+    let author= document.getElementById('author').value
+    let pages= document.getElementById('pages').value
+
+    let newBook = new Book(title, author, pages)
+    console.log(newBook)
+    library.push(newBook)
+    console.log(library)
+
+    localStorage.setItem("book", JSON.stringify(library))
+
+}
+
+
+saveBook.addEventListener('click', ()=>{
+    let title= document.getElementById('title').value
+    let author= document.getElementById('author').value
+    let pages= document.getElementById('pages').value
+    const displayBook = document.getElementById('displayBook')
+
+
+    if(title && author && pages){
+
+        addBookToLibrary();
+        render();
+        
+
+        displayBook.innerHTML = `You have just saved ${title} by ${author}, which has ${pages} pages. `
+
+        
+    } else{
+        displayBook.innerHTML = 'please be sure to fill in all fields'
+    }
+   
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 
 let inputs = document.querySelectorAll('input') // how does inputs.addEventListener work?? :<
 let labels = document.querySelectorAll('label')
@@ -47,27 +183,7 @@ let enterPages = document.querySelectorAll('.enterPages')
 
 
 
-// let users add a maximum of 10 books
-
-let clicks = 0;
-let clickLimit = 8; 
-
-function maxClicks(){ 
-    if(clicks <= clickLimit){
-        clicks+= 1;
-
-    } else if(clicks > clickLimit){
-        saveBook.disabled = true;
-    }
-}
-
 /*
-function getStoredBook(){
-    document.querySelector('.bookCard') = JSON.parse(localStorage.getItem("bookDiv"))
-}3*/
-
-
-
 
 //create the book
 
@@ -109,10 +225,7 @@ function createBook (){
 
     localStorage.setItem("bookDiv", JSON.stringify(myLibrary))
 
-    /*
-    function addBook(){
-        localStorage.setItem("bookDiv", bookCard.outerHTML)
-    }*/
+    
 
 
 }
@@ -137,12 +250,7 @@ saveBook.addEventListener('click', ()=>{
         myLibrary.push(bookArray);
         displayBook.innerHTML = `saved: ${titleOnly} by ${authorOnly} with ${pagesOnly} pages :-)`
 
-        /*
-        let bookContainer = document.querySelector('.bookContainer')
-        bookContainer.style.display = 'block'
-        bookContainer.style.transition = '0.5s linear' */
-
-
+      
        
          for(let i = 0; i< book.length; i++){
            book[i].onclick = function(){
@@ -197,15 +305,21 @@ console.log(myLibrary)
 for(let j = 0; j < inputs.length; j++){
    
    /* console.log("j= " + j)*/
-    let input = inputs[j];
+   // let input = inputs[j];
     /*console.log(input)*/
+
+
+
+
+
+    /*
 
   
     //when theres a hover on input loop through labels
 
     input.addEventListener('mouseover', () =>{
         for(let k = 0; k < labels.length; k++){
-            /*console.log("k= " + k)*/
+           
             
             let label = labels[k];
             label.style.color = 'rgba(165, 42, 42, 0.5)';
@@ -215,6 +329,10 @@ for(let j = 0; j < inputs.length; j++){
 
 
 /* -------------------------------------MOBILE SCROLL DOWN TO BOOKSHELF-------------------------------- */
+
+/*
+
+
 const mobileScrollDown = document.getElementById('mobileScrollDown')
 
 mobileScrollDown.addEventListener('click', ()=>{
@@ -226,3 +344,4 @@ mobileScrollDown.addEventListener('click', ()=>{
 
 })
 
+*/
