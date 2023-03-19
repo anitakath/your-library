@@ -1,12 +1,12 @@
 
 
-let myLibrary = JSON.parse(localStorage.getItem("books")) || []
-console.log(myLibrary)
+// let myLibrary = JSON.parse(localStorage.getItem("books")) || []
+// console.log(myLibrary)
 
 
 const saveBook = document.getElementById('saveBook')
 
-let library =  JSON.parse(localStorage.getItem("books")) || []
+let library =  JSON.parse(localStorage.getItem("book")) || []
 console.log(library)
 
 
@@ -18,16 +18,22 @@ function Book(title, author, pages){
     this.pages = pages;
 }
 
+
+
 function render(){
 
     let bookContainer = document.getElementById('bookContainer')
     bookContainer.innerHTML = " ";
+
+   
     //loop over the library array to display your books
     for(let i = 0; i < library.length; i++){
         //console.log(library[i])
         let book = library[i]
         let bookDiv = document.createElement('div')
         bookDiv.setAttribute("class", "bookDiv")
+        console.log(library)
+
 
         bookDiv.innerHTML = `
         <div class="bookTitle">
@@ -56,11 +62,15 @@ function render(){
     }
 }
 
+render();
+
 
 
 function removeBook(idx){
     library.splice(idx, 1)
     render();
+    localStorage.setItem("book", JSON.stringify(library))
+
 }
 
 
@@ -122,6 +132,7 @@ saveBook.addEventListener('click', ()=>{
 
         addBookToLibrary();
         render();
+        localStorage.setItem("book", JSON.stringify(library))
         
 
         displayBook.innerHTML = `You have just saved ${title} by ${author}, which has ${pages} pages. `
