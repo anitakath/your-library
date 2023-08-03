@@ -10,7 +10,7 @@ let library =  JSON.parse(localStorage.getItem("book")) || []
 console.log(library)
 
 
-
+/* --------------- CREATE CONSTRUCTOR OBJECT-------------- */
 
 function Book(title, author, pages){
     this.title = title;
@@ -19,6 +19,9 @@ function Book(title, author, pages){
 }
 
 
+
+
+/* --------------- DECLARE RENDER FUNCTION-------------- */
 
 function render(){
 
@@ -32,11 +35,11 @@ function render(){
         let book = library[i]
         let bookDiv = document.createElement('div')
         bookDiv.setAttribute("class", "bookDiv")
-        console.log(library)
+        console.log(library[i])
 
 
         bookDiv.innerHTML = `
-        <div class="bookTitle">
+        <div class="bookInfosContainer">
             <h3 class="title">${book.title}</h3>
             <h4 class="author"><em>by:</em> ${book.author}</h4>
             <p class="pages">${book.pages} pages</p>
@@ -90,6 +93,7 @@ function displaySignUp () {
     </div>
     <div class="signUpBtn">
        <button> sign up </button>
+        <!-- <i class="bi bi-chevron-left"></i> -->
     </div>
 
     `
@@ -105,15 +109,14 @@ function displaySignUp () {
 
 
 
-function addBookToLibrary(){
-    // get the values from the inputs
-    let title= document.getElementById('title').value
-    let author= document.getElementById('author').value
-    let pages= document.getElementById('pages').value
+function addBookToLibrary(title, author, pages){
+   
 
     let newBook = new Book(title, author, pages)
-    console.log(newBook)
     library.push(newBook)
+
+
+    console.log(newBook)
     console.log(library)
 
     localStorage.setItem("book", JSON.stringify(library))
@@ -125,12 +128,13 @@ saveBook.addEventListener('click', ()=>{
     let title= document.getElementById('title').value
     let author= document.getElementById('author').value
     let pages= document.getElementById('pages').value
+
     const displayBook = document.getElementById('displayBook')
 
 
-    if(title && author && pages){
+    if(title && author && pages >= 1){
 
-        addBookToLibrary();
+        addBookToLibrary(title, author, pages);
         render();
         localStorage.setItem("book", JSON.stringify(library))
         
@@ -138,7 +142,9 @@ saveBook.addEventListener('click', ()=>{
         displayBook.innerHTML = `You have just saved ${title} by ${author}, which has ${pages} pages. `
 
         
-    } else{
+    } else if(title && author && pages  <=1){
+        displayBook.innerHTML = 'please make sure you add a validated number of pages (this cannot be negative or zero!) '
+    }else{
         displayBook.innerHTML = 'please be sure to fill in all fields'
     }
    
