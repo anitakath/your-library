@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Aboreto&family=Amatic+SC&family=Poiret+One&family=Raleway:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aboreto&family=Amatic+SC&family=Be+Vietnam+Pro:wght@100&family=Poiret+One&family=Raleway:wght@200&display=swap');
 *{
     box-sizing: border-box;
 }
@@ -18,8 +18,8 @@ body{
 :root{
     --theMainFont: 'Aboreto', cursive;
     --additionalFont: 'Poiret One', cursive;
-    --bookHover: hsl(0, 0%, 80%);
-    --inputBookBg: rgba(255, 255, 255, 0.7);
+    --bookHover: rgba(106, 57, 55, 0.9);
+    --inputBookBg: rgba(106, 57, 55, 0.5);
 }
 
 a{
@@ -78,17 +78,22 @@ a{
     font-weight: bolder;
 }
 
+
+
 .inputField input{
     border: none;
     height: 2rem;
     cursor: pointer;
     font-size: 20px;
     padding: 5px;
-    background-color: var(--inputBookBg)
+    background-color: var(--inputBookBg);
+    font-family: 'Be Vietnam Pro', sans-serif;
 }
 
 .inputField input:focus{
     outline: none;
+    background-color: var(--bookHover);
+    color: white;
 }
 
 .inputField button{
@@ -111,7 +116,7 @@ a{
     font-size: 1.4rem;
     letter-spacing: 3px;
     word-spacing: 2px;
-    font-family: var(--additionalFont);
+    font-family: 'Be Vietnam Pro', sans-serif;
     color: black;
     font-weight: bolder;
     text-shadow: 1px 1px 1px black;
@@ -165,7 +170,11 @@ a{
     height: 80px;
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
+
+
 
 .signUpBtn button{
     transition: 1s ease;
@@ -178,6 +187,18 @@ a{
     letter-spacing: 2px;
     word-spacing: 3px;
     font-family: var(--theMainFont);
+}
+
+.signUpBtn i{
+    margin: 20px;
+    font-size: 1.5rem;
+    color: black;
+}
+
+.signUpBtn i:hover{
+    color: white;
+    cursor: pointer;
+    transition: 1s ease;
 }
 
 .signUpBtn button:hover{
@@ -256,6 +277,7 @@ a{
     align-items: center;
     background-color: rgba(255, 255, 255, 0.5);
     margin: 40px 10px;
+    margin-top: 200px;
     flex-wrap: wrap;
     padding: 10px;
 }
@@ -269,75 +291,82 @@ a{
 
 .bookDiv{
     border: 0.5px solid black;
-    width: 300px;
-    height: 150px;
+    width: 200px;
+    min-height: 300px;
     background-color: var(--inputBookBg);
     transition: 0.5 ease-in-out;
-    box-shadow: 1px 1px 1px black;
-    
+    box-shadow: -2px 4px 1px black;
+    border-top-right-radius: 5px;
     display: flex;
     margin: 2px;
+    margin-bottom: 70px;
+    padding: 10px;
     align-items: center;
     position: relative;
 }
 
 .bookDiv:hover{
+    transition: 0.4s ease;
     background-color: var(--bookHover);
-    transition: 1s ease;
+    cursor: pointer;
+    box-shadow: 3px 6px 1px black;
+    transform: scale(1.05)
 }
 
-.bookTitle{
-    border-bottom-left-radius: 10%;
-    border-top-left-radius: 10%;
-    height: 100%;
+
+.bookInfosContainer{
+    min-height: 300px;
+    width: 100%;
+    padding: 2px;
     color: black;
     display: flex;
     flex-direction: column;
-    width: 90%;
+    border: 2px solid rgba(255,255,255, 0.3);
+    overflow-wrap: break-word;
 }
 
 .title, .author, .pages{
-    margin: 8px 2px;
-    padding: 3px;
+    min-height: 50px;
+    padding: 0px 10px;
     text-align: center;
     width: 100%;
-    height:30%;
-    overflow-wrap: break-word;
+    flex-grow: 1;
     hyphens: auto;
-    
+    font-size: 1.3rem;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    position: relative;
+    top: 20px;
 }
 
-.title:hover, .author:hover, .pages:hover{
-    letter-spacing: 2px;
-    transition: 1s ease;
-    color: white;
-}
 
 
 
 
 .deleteBookDiv{
     position: absolute;
-    right: 5px;
-    top: 5px;
-   
-   
+    right: 10px;
+    top: 10px;
+    width: 40px;
+    height: 40px;
 }
 
 .deleteBook{
+    width: 100%;
+    height: 100%;
     cursor: pointer;
     border-right: none;
     border-left: none;
-    border-top: 0.5px solid black;
-    border-bottom: 0.5px solid black;
-
+    border: none;
+    font-size: 1.1rem;
+    background-color: rgba(106, 57, 55, 1);
+    color: white;
 }
 
 .deleteBook:hover{
     transition: 1s ease;
-    background-color: black;
-    color: white;
-    
+    background-color:white;
+    color:  rgba(106, 57, 55, 1);
+    border-bottom-left-radius: 0px;
 }
 
 
@@ -356,7 +385,6 @@ a{
     .inputField{
         width: 50vw;
         transition: 1s ease;
-        
     }
 
     .bookContainer{
@@ -381,13 +409,20 @@ a{
     .bookContainer{
         grid-template-columns: repeat(2, 300px);
         gap: 20px;
+
     }
 }
 
 @media (max-width: 700px){
     .bookContainer{
-        grid-template-columns: repeat(1, 300px);
+        grid-template-columns: repeat(1, 1fr);
         transition: 1s ease;
+        display: flex;
+    }
+
+    .bookDiv{
+        width: 70vw;
+        height: 500px;
     }
 }
 
@@ -399,21 +434,27 @@ a{
 
     .storeBookParagraph{
         font-size: 1rem;
+        position: relative;
+        top: -20px;
     }
 
     .displayBook{
         font-size: 1.5rem;
+
+    }
+
+    .bookContainer{
+        padding: 100px 0px;
     }
 
     #mobileScrollDown{
         display: inline-block;
         transition: 1s ease;
+        margin-bottom: 40px;
     }
 
-    .signUpTitle h4{
-        margin: 10px 5px 0px 5px;
-        line-height: 30px;
-        width: 80vw;
+    #infoTestVersion{
+        position: relative;
+        top: -20px;
     }
-   
 }
